@@ -1,0 +1,27 @@
+---
+linters:
+  enable-all: true
+  disable:
+    - depguard
+    - exhaustruct
+    - exhaustivestruct
+
+linters-settings:
+  exhaustive:
+    # indicates that switch statements are to be considered exhaustive if a
+    # 'default' case is present, even if all enum members aren't listed in the
+    # switch
+    default-signifies-exhaustive: true
+  errcheck:
+    check-blank: true
+    check-type-assertions: true
+
+run:
+  skip-dirs:
+    - internal/ms
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - ifshort
