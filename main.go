@@ -118,7 +118,12 @@ func main() {
 			Name:  "license",
 			Usage: "View the license",
 			Action: func(c *cli.Context) error {
-				fmt.Fprintln(os.Stdout, license)
+				result, err := glamour.Render(license, "auto")
+				if err != nil {
+					return fmt.Errorf("rendering license: %w", err)
+				}
+
+				fmt.Fprintln(os.Stdout, result)
 
 				return nil
 			},
