@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/charmbracelet/glamour"
 	"github.com/mattn/go-isatty"
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
@@ -105,8 +106,13 @@ func main() {
 		},
 		{
 			Name:   "markdown",
-			Usage:  "List årsstjerner",
+			Usage:  "List årsstjerner as markdown",
 			Action: list,
+		},
+		{
+			Name:   "term",
+			Usage:  "List årsstjerner in terminal",
+			Action: term,
 		},
 		{
 			Name:  "license",
