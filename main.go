@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/charmbracelet/glamour"
 	"github.com/mattn/go-isatty"
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
@@ -105,14 +106,24 @@ func main() {
 		},
 		{
 			Name:   "markdown",
-			Usage:  "List årsstjerner",
+			Usage:  "List årsstjerner as markdown",
 			Action: list,
+		},
+		{
+			Name:   "term",
+			Usage:  "List årsstjerner in terminal",
+			Action: term,
 		},
 		{
 			Name:  "license",
 			Usage: "View the license",
 			Action: func(c *cli.Context) error {
-				fmt.Fprintln(os.Stdout, license)
+				result, err := glamour.Render(license, "auto")
+				if err != nil {
+					return fmt.Errorf("rendering license: %w", err)
+				}
+
+				fmt.Fprintln(os.Stdout, result)
 
 				return nil
 			},

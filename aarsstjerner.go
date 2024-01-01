@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"bitbucket.org/long174/go-odoo"
+	"github.com/charmbracelet/glamour"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
@@ -81,6 +82,22 @@ func list(ctx *cli.Context) error {
 	}
 
 	fmt.Fprintln(os.Stdout, md)
+
+	return nil
+}
+
+func term(ctx *cli.Context) error {
+	md, err := getMarkdown(ctx)
+	if err != nil {
+		return err
+	}
+
+	result, err := glamour.Render(md, "auto")
+	if err != nil {
+		return fmt.Errorf("rendering output as markdown: %w", err)
+	}
+
+	fmt.Fprintln(os.Stdout, result)
 
 	return nil
 }
