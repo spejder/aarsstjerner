@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	bitbucket.org/long174/go-odoo v1.12.1
-	github.com/brianvoe/gofakeit/v6 v6.27.0
+	github.com/brianvoe/gofakeit/v6 v6.28.0
 	github.com/carlmjohnson/versioninfo v0.22.5
 	github.com/charmbracelet/glamour v0.6.0
 	github.com/gomarkdown/markdown v0.0.0-20231222211730-1d6d20845b47
