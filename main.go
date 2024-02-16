@@ -49,37 +49,37 @@ func main() {
 		altsrc.NewStringFlag(&cli.StringFlag{
 			Name:    "username",
 			Value:   "",
-			Usage:   "The Medlemsservice username",
+			Usage:   "The Medlemsservice `username`",
 			EnvVars: []string{"MS_USERNAME"},
 		}),
 		altsrc.NewStringFlag(&cli.StringFlag{
 			Name:    "1pass",
 			Value:   "",
-			Usage:   "A 1Password secret reference for the Medlemsservice password",
+			Usage:   "A 1Password secret `reference` for the Medlemsservice password",
 			EnvVars: []string{"MS_1PASS"},
 		}),
 		altsrc.NewIntFlag(&cli.IntFlag{
 			Name:    "slack",
 			Value:   90, //nolint:gomnd
-			Usage:   "Days of slack in the calculation",
+			Usage:   "Add `days` of slack in the calculation",
 			EnvVars: []string{"AARSSTJERNER_SLACK"},
 		}),
 		altsrc.NewStringFlag(&cli.StringFlag{
 			Name:    "ms-url",
 			Value:   "https://medlem.dds.dk",
-			Usage:   "The Medlemsservice URL",
+			Usage:   "The Medlemsservice `URL`",
 			EnvVars: []string{"MS_URL"},
 		}),
 		altsrc.NewStringFlag(&cli.StringFlag{
 			Name:    "ms-database",
 			Value:   "dds",
-			Usage:   "The Medlemsservice database name",
+			Usage:   "The Medlemsservice database `name`",
 			EnvVars: []string{"MS_DATABASE"},
 		}),
 		&cli.StringFlag{
 			Name:      "config",
 			Value:     configPath,
-			Usage:     "Read config from `FILE`",
+			Usage:     "Read config from `file`",
 			EnvVars:   []string{"AARSSTJERNER_CONFIG_FILE"},
 			TakesFile: true,
 		},
