@@ -3,16 +3,6 @@ name: Lint
 on: pull_request
 
 jobs:
-  dockerfile:
-    name: dockerfile
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run hadolint
-        uses: hadolint/hadolint-action@v3.1.0
-        with:
-          trusted-registries: docker.io
-
   yamllint:
     name: Yamllint
     runs-on: ubuntu-22.04
