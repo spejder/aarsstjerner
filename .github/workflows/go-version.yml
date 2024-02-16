@@ -54,22 +54,22 @@ jobs:
           patch-level: true
           unstable: true
       - name: Get draft release notes URL
-        if: steps.go-version-unstable.outputs.latest == steps.go-version-stable.outputs.latest
+        if: steps.go-version-unstable.outputs.latest != steps.go-version-stable.outputs.latest
         id: release-notes
         run: |
           # shellcheck disable=SC2086
           echo "URL=https://tip.golang.org/doc/go$(sed -E 's/([0-9]+\.[0-9]+).*/\1/' <<< '${{ steps.go-version-unstable.outputs.latest }}')" >> $GITHUB_OUTPUT
       - name: Setup Go ${{ steps.go-version-unstable.outputs.latest }}
-        if: steps.go-version-unstable.outputs.latest == steps.go-version-stable.outputs.latest
+        if: steps.go-version-unstable.outputs.latest != steps.go-version-stable.outputs.latest
         uses: WillAbides/setup-go-faster@v1.14.0
         with:
           go-version: ${{ steps.go-version-unstable.outputs.latest }}
       - run: go mod edit -go ${{ steps.go-version-unstable.outputs.latest }}
-        if: steps.go-version-unstable.outputs.latest == steps.go-version-stable.outputs.latest
+        if: steps.go-version-unstable.outputs.latest != steps.go-version-stable.outputs.latest
       - run: git diff
-        if: steps.go-version-unstable.outputs.latest == steps.go-version-stable.outputs.latest
+        if: steps.go-version-unstable.outputs.latest != steps.go-version-stable.outputs.latest
       - name: "Create pull request"
-        if: steps.go-version-unstable.outputs.latest == steps.go-version-stable.outputs.latest
+        if: steps.go-version-unstable.outputs.latest != steps.go-version-stable.outputs.latest
         uses: peter-evans/create-pull-request@v5
         with:
           draft: true
