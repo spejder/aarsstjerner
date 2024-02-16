@@ -26,12 +26,10 @@ jobs:
           WITH_V: true
           DEFAULT_BUMP: patch
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-      - uses: arnested/go-version-action@v1
-        id: go-version
-      - name: Set up Go ${{ steps.go-version.outputs.latest }}.x
+      - name: Set up Go
         uses: WillAbides/setup-go-faster@v1.14.0
         with:
-          go-version: ${{ steps.go-version.outputs.latest }}.x
+          go-version-file: go.mod
           ignore-local: true
       - run: go version
       - name: Run GoReleaser
