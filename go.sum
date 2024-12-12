@@ -221,5 +221,5 @@ gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
 gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
-tailscale.com v1.78.1 h1:qGCGq6gRQEQ/bCpphD/l+fOnSheu2FzushFrRSZnjbo=
-tailscale.com v1.78.1/go.mod h1:gT7ALbLFCr2YIu0kgc9Q3tBVaTlod65D2N6jMLH11Bk=
+tailscale.com v1.78.3 h1:2BJepIEYA0ba0ZXn2rOuZjYzIV4Az+X9RS5XJF007Ug=
+tailscale.com v1.78.3/go.mod h1:gT7ALbLFCr2YIu0kgc9Q3tBVaTlod65D2N6jMLH11Bk=
