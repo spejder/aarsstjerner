@@ -1,6 +1,6 @@
 module github.com/spejder/aarsstjerner
 
-go 1.23.6
+go 1.24.0
 
 require (
 	bitbucket.org/long174/go-odoo v1.12.1
