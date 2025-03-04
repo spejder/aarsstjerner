@@ -20,7 +20,7 @@ jobs:
           patch-level: true
       - name: Is ${{ steps.go-version.outputs.latest }} ready in WillAbides/setup-go-faster?
         run: |
-          curl https://raw.githubusercontent.com/WillAbides/goreleases/main/versions.txt | grep --quiet --fixed-strings 'go${{ steps.go-version.outputs.latest }}' || (echo "Version ${{ steps.go-version.outputs.latest }} not ready in WillAbides/setup-go-faster yet" ; exit 1)
+          curl --silent https://raw.githubusercontent.com/WillAbides/goreleases/main/versions.txt | grep --quiet --fixed-strings 'go${{ steps.go-version.outputs.latest }}' || (echo "Version ${{ steps.go-version.outputs.latest }} not ready in WillAbides/setup-go-faster yet" ; exit 1)
       - name: Setup Go ${{ steps.go-version.outputs.latest }}
         uses: WillAbides/setup-go-faster@v1.14.0
         with:
@@ -64,7 +64,7 @@ jobs:
           echo "URL=https://tip.golang.org/doc/go$(sed -E 's/([0-9]+\.[0-9]+).*/\1/' <<< '${{ steps.go-version-unstable.outputs.latest }}')" >> $GITHUB_OUTPUT
       - name: Is ${{ steps.go-version-unstable.outputs.latest }} ready in WillAbides/setup-go-faster?
         run: |
-          curl https://raw.githubusercontent.com/WillAbides/goreleases/main/versions.txt | grep --quiet --fixed-strings 'go${{ steps.go-version-unstable.outputs.latest }}' || (echo "Version ${{ steps.go-version-unstable.outputs.latest }} not ready in WillAbides/setup-go-faster yet" ; exit 1)
+          curl --silent https://raw.githubusercontent.com/WillAbides/goreleases/main/versions.txt | grep --quiet --fixed-strings 'go${{ steps.go-version-unstable.outputs.latest }}' || (echo "Version ${{ steps.go-version-unstable.outputs.latest }} not ready in WillAbides/setup-go-faster yet" ; exit 1)
       - name: Setup Go ${{ steps.go-version-unstable.outputs.latest }}
         if: steps.go-version-unstable.outputs.latest != steps.go-version-stable.outputs.latest
         uses: WillAbides/setup-go-faster@v1.14.0
