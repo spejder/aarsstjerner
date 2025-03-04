@@ -60,7 +60,7 @@ func main() {
 		}),
 		altsrc.NewIntFlag(&cli.IntFlag{
 			Name:    "slack",
-			Value:   90, //nolint:gomnd
+			Value:   90, //nolint:mnd
 			Usage:   "Add `days` of slack in the calculation",
 			EnvVars: []string{"AARSSTJERNER_SLACK"},
 		}),
@@ -117,7 +117,7 @@ func main() {
 		{
 			Name:  "license",
 			Usage: "View the license",
-			Action: func(c *cli.Context) error {
+			Action: func(_ *cli.Context) error {
 				result, err := glamour.Render(license, "auto")
 				if err != nil {
 					return fmt.Errorf("rendering license: %w", err)
