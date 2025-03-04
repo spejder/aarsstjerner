@@ -34,7 +34,7 @@ func editConfig(ctx *cli.Context) error {
 }
 
 func createConfig(configFile string) error {
-	//nolint:gomnd
+	//nolint:mnd
 	err := atomicfile.WriteFile(configFile, []byte{}, 0o600)
 	if err != nil {
 		return fmt.Errorf("failed to write config file: %w", err)

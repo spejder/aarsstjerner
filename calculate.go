@@ -33,7 +33,7 @@ func calculate(ctx *cli.Context, profile ms.MemberProfile, membershipsMap map[in
 		seconds += int(end - start)
 	}
 
-	//nolint:gomnd
+	//nolint:mnd
 	years := ((seconds / 86400) + ctx.Int("slack")) / 365
 
 	if !active {
