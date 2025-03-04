@@ -18,8 +18,9 @@ jobs:
         id: go-version
         with:
           patch-level: true
-      - run: |
-          curl https://raw.githubusercontent.com/WillAbides/goreleases/main/versions.txt | grep --quiet --fixed-strings 'go${{ steps.go-version.outputs.latest }}' || (echo "Version steps.go-version.outputs.latest not ready in WillAbides/setup-go-faster yet" ; exit 1)
+      - name: Is ${{ steps.go-version.outputs.latest }} ready in WillAbides/setup-go-faster?
+        run: |
+          curl https://raw.githubusercontent.com/WillAbides/goreleases/main/versions.txt | grep --quiet --fixed-strings 'go${{ steps.go-version.outputs.latest }}' || (echo "Version ${{ steps.go-version.outputs.latest }} not ready in WillAbides/setup-go-faster yet" ; exit 1)
       - name: Setup Go ${{ steps.go-version.outputs.latest }}
         uses: WillAbides/setup-go-faster@v1.14.0
         with:
