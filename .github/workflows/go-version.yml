@@ -63,6 +63,7 @@ jobs:
           # shellcheck disable=SC2086
           echo "URL=https://tip.golang.org/doc/go$(sed -E 's/([0-9]+\.[0-9]+).*/\1/' <<< '${{ steps.go-version-unstable.outputs.latest }}')" >> $GITHUB_OUTPUT
       - name: Is ${{ steps.go-version-unstable.outputs.latest }} ready in WillAbides/setup-go-faster?
+        if: steps.go-version-unstable.outputs.latest != steps.go-version-stable.outputs.latest
         run: |
           curl --proto =https --fail --silent --show-error https://raw.githubusercontent.com/WillAbides/goreleases/main/versions.txt | grep --quiet --fixed-strings 'go${{ steps.go-version-unstable.outputs.latest }}' || (echo "Version ${{ steps.go-version-unstable.outputs.latest }} not ready in WillAbides/setup-go-faster yet" ; exit 1)
       - name: Setup Go ${{ steps.go-version-unstable.outputs.latest }}
