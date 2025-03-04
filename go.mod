@@ -13,7 +13,7 @@ require (
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/urfave/cli/v2 v2.27.5
 	gopkg.in/yaml.v3 v3.0.1
-	tailscale.com v1.80.2
+	tailscale.com v1.80.3
 )
 
 require (
