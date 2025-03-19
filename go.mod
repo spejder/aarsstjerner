@@ -6,7 +6,7 @@ require (
 	bitbucket.org/long174/go-odoo v1.12.1
 	github.com/brianvoe/gofakeit/v6 v6.28.0
 	github.com/carlmjohnson/versioninfo v0.22.5
-	github.com/charmbracelet/glamour v0.9.0
+	github.com/charmbracelet/glamour v0.9.1
 	github.com/gomarkdown/markdown v0.0.0-20241205020045-f7e15b2f3e62
 	github.com/howeyc/gopass v0.0.0-20210920133722-c8aef6fb66ef
 	github.com/mattn/go-isatty v0.0.20
