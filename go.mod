@@ -1,6 +1,7 @@
 module github.com/spejder/aarsstjerner
 
 go 1.24.1
+toolchain go1.24.1
 
 require (
 	bitbucket.org/long174/go-odoo v1.12.1
@@ -13,7 +14,7 @@ require (
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/urfave/cli/v2 v2.27.6
 	gopkg.in/yaml.v3 v3.0.1
-	tailscale.com v1.80.3
+	tailscale.com v1.82.0
 )
 
 require (
