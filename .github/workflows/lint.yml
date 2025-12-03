@@ -7,7 +7,7 @@ on: pull_request
 jobs:
   yamllint:
     name: Yamllint
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - name: Run Yamllint
@@ -17,7 +17,7 @@ jobs:
 
   markdownlint:
     name: markdown
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - name: Run markdownlint
@@ -25,11 +25,11 @@ jobs:
 
   golangci-lint:
     name: go
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - name: Setup Go
-        uses: WillAbides/setup-go-faster@v1.14.0
+        uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
       - run: go version

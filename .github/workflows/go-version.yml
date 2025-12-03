@@ -11,7 +11,7 @@ permissions:
 jobs:
   stable:
     name: Stable
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: arnested/go-version-action@v1
@@ -22,7 +22,7 @@ jobs:
         run: |
           curl --proto =https --fail --silent --show-error https://raw.githubusercontent.com/WillAbides/goreleases/main/versions.txt | grep --quiet --fixed-strings 'go${{ steps.go-version.outputs.latest }}' || (echo "Version ${{ steps.go-version.outputs.latest }} not ready in WillAbides/setup-go-faster yet" ; exit 1)
       - name: Setup Go ${{ steps.go-version.outputs.latest }}
-        uses: WillAbides/setup-go-faster@v1.14.0
+        uses: actions/setup-go@v6
         with:
           go-version: ${{ steps.go-version.outputs.latest }}
       - run: go mod edit -go ${{ steps.go-version.outputs.latest }}
@@ -44,7 +44,7 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
   unstable:
     name: Unstable
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: arnested/go-version-action@v1
@@ -68,7 +68,7 @@ jobs:
           curl --proto =https --fail --silent --show-error https://raw.githubusercontent.com/WillAbides/goreleases/main/versions.txt | grep --quiet --fixed-strings 'go${{ steps.go-version-unstable.outputs.latest }}' || (echo "Version ${{ steps.go-version-unstable.outputs.latest }} not ready in WillAbides/setup-go-faster yet" ; exit 1)
       - name: Setup Go ${{ steps.go-version-unstable.outputs.latest }}
         if: steps.go-version-unstable.outputs.latest != steps.go-version-stable.outputs.latest
-        uses: WillAbides/setup-go-faster@v1.14.0
+        uses: actions/setup-go@v6
         with:
           go-version: ${{ steps.go-version-unstable.outputs.latest }}
       - run: go mod edit -go ${{ steps.go-version-unstable.outputs.latest }}
