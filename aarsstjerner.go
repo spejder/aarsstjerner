@@ -5,6 +5,7 @@ import (
 	"os"
 	"slices"
 	"sort"
+	"strings"
 	"time"
 
 	"bitbucket.org/long174/go-odoo"
@@ -166,16 +167,16 @@ func getMarkdown(ctx *cli.Context) (string, error) {
 	sort.Ints(keys)
 	slices.Reverse(keys)
 
-	output := ""
+	var output strings.Builder
 	for _, years := range keys {
-		output += fmt.Sprintf("\n# %d-årsstjerner (%d stk)\n", years, len(res[years]))
+		output.WriteString(fmt.Sprintf("\n# %d-årsstjerner (%d stk)\n", years, len(res[years])))
 
 		for _, name := range res[years] {
-			output += fmt.Sprintf("- %s\n", name)
+			output.WriteString(fmt.Sprintf("- %s\n", name))
 		}
 	}
 
-	output += fmt.Sprintf("\n---\n_%s_\n", time.Now().Format("2006-01-02 15:04:05"))
+	output.WriteString(fmt.Sprintf("\n---\n_%s_\n", time.Now().Format("2006-01-02 15:04:05")))
 
-	return output, nil
+	return output.String(), nil
 }
