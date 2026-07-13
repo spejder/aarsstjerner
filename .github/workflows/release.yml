@@ -38,7 +38,7 @@ jobs:
   release:
     needs: tag
     if: needs.tag.outputs.new_tag != ''
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v7
         with:
@@ -50,10 +50,7 @@ jobs:
           go-version-file: go.mod
       - run: go version
       - name: Set up Zig
-        uses: mlugg/setup-zig@v1
-        with:
-          version: 0.13.0
-      - run: zig version
+        uses: ./.github/actions/setup-zig
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v7
         with:
