@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 	"strings"
 
+	onepassword "github.com/1password/onepassword-sdk-go"
 	"github.com/howeyc/gopass"
 	"github.com/urfave/cli/v2"
 )
@@ -29,15 +29,22 @@ func credentials(ctx *cli.Context) (string, string, error) {
 
 	var password string
 
-	if opPath, err := exec.LookPath("op"); err == nil && ctx.String("1pass") != "" {
+	if account := ctx.String("1pass-account"); ctx.String("1pass") != "" && account != "" {
 		fmt.Fprintf(os.Stderr, "Henter Medlemsservice-adgangskode for %s fra 1Password...\n", username)
 
-		bytePassword, err := exec.Command(opPath, "read", ctx.String("1pass"), "--no-newline").Output()
+		client, err := onepassword.NewClient(
+			ctx.Context,
+			onepassword.WithDesktopAppIntegration(account),
+			onepassword.WithIntegrationInfo("aarsstjerner", getVersion()),
+		)
 		if err != nil {
-			log.Fatal(err)
+			return "", "", fmt.Errorf("creating 1Password client: %w", err)
 		}
 
-		password = string(bytePassword)
+		password, err = client.Secrets().Resolve(ctx.Context, ctx.String("1pass"))
+		if err != nil {
+			return "", "", fmt.Errorf("resolving 1Password secret: %w", err)
+		}
 	} else {
 		bytePassword, err := gopass.GetPasswdPrompt("Password: ", true, os.Stdin, os.Stderr)
 		if err != nil {

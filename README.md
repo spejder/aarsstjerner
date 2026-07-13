@@ -52,6 +52,7 @@ COMMANDS:
 GLOBAL OPTIONS:
    --username value     The Medlemsservice username [$MS_USERNAME]
    --1pass value        A 1Password secret reference for the Medlemsservice password [$MS_1PASS]
+   --1pass-account value  The 1Password account name for desktop app integration [$MS_1PASS_ACCOUNT]
    --slack value        Days of slack in the calculation (default: 90) [$AARSSTJERNER_SLACK]
    --ms-url value       The Medlemsservice URL (default: "https://medlem.dds.dk") [$MS_URL]
    --ms-database value  The Medlemsservice database name (default: "dds") [$MS_DATABASE]

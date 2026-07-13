@@ -58,6 +58,12 @@ func main() {
 			Usage:   "A 1Password secret `reference` for the Medlemsservice password",
 			EnvVars: []string{"MS_1PASS"},
 		}),
+		altsrc.NewStringFlag(&cli.StringFlag{
+			Name:    "1pass-account",
+			Value:   "",
+			Usage:   "The 1Password `account` name for desktop app integration",
+			EnvVars: []string{"MS_1PASS_ACCOUNT"},
+		}),
 		altsrc.NewIntFlag(&cli.IntFlag{
 			Name:    "slack",
 			Value:   90, //nolint:mnd
