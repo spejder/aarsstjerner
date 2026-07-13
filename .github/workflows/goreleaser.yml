@@ -1,0 +1,30 @@
+---
+name: GoReleaser
+
+permissions:
+  contents: read
+
+on: pull_request
+
+jobs:
+  goreleaser:
+    name: GoReleaser (snapshot)
+    # Mirrors the release job (see release.yml): darwin builds natively with
+    # clang and linux/amd64 cross-compiles with zig. Running on the same runner
+    # exercises the goreleaser config without publishing anything.
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: '0'
+      - name: Set up Go
+        uses: arnested/setup-go@rc
+        with:
+          go-version-file: go.mod
+      - run: go version
+      - name: Set up Zig
+        uses: ./.github/actions/setup-zig
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v7
+        with:
+          args: release --snapshot --clean --skip=publish

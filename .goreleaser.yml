@@ -1,13 +1,48 @@
 ---
 version: 2
+# The 1Password SDK's desktop app integration requires CGO. The release runs on
+# a macOS runner (see .github/workflows/release.yml): darwin targets build with
+# the native clang/SDK, and the linux target cross-compiles with zig as the C
+# compiler.
 builds:
-  - env:
-      - CGO_ENABLED=0
+  - id: aarsstjerner
+    binary: aarsstjerner
+    env:
+      - CGO_ENABLED=1
     mod_timestamp: "{{ .CommitTimestamp }}"
     flags:
       - -trimpath
     ldflags:
       - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }}
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      # We only ship linux on amd64; darwin ships both amd64 and arm64.
+      - goos: linux
+        goarch: arm64
+    overrides:
+      # linux/amd64 cross-compiles from macOS using zig as the C compiler.
+      - goos: linux
+        goarch: amd64
+        env:
+          - CC=zig cc -target x86_64-linux-gnu
+          - CXX=zig c++ -target x86_64-linux-gnu
+      # darwin builds natively on the macOS runner; -arch pins the slice so both
+      # architectures build regardless of the runner's own architecture.
+      - goos: darwin
+        goarch: amd64
+        env:
+          - CC=clang -arch x86_64
+          - CXX=clang++ -arch x86_64
+      - goos: darwin
+        goarch: arm64
+        env:
+          - CC=clang -arch arm64
+          - CXX=clang++ -arch arm64
 archives:
   - formats:
       - binary

@@ -1,0 +1,38 @@
+---
+name: Set up Zig
+description: Download and install a pinned Zig release from ziglang.org
+
+inputs:
+  version:
+    description: The Zig version to install
+    required: false
+    default: 0.13.0
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        version="${{ inputs.version }}"
+
+        case "$(uname -s)" in
+          Darwin) os=macos ;;
+          Linux) os=linux ;;
+          *) echo "unsupported OS: $(uname -s)" >&2; exit 1 ;;
+        esac
+
+        case "$(uname -m)" in
+          arm64 | aarch64) arch=aarch64 ;;
+          x86_64) arch=x86_64 ;;
+          *) echo "unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+        esac
+
+        name="zig-${os}-${arch}-${version}"
+        url="https://ziglang.org/download/${version}/${name}.tar.xz"
+
+        echo "Downloading ${url}"
+        curl -fsSL "$url" -o "${RUNNER_TEMP}/zig.tar.xz"
+        tar xf "${RUNNER_TEMP}/zig.tar.xz" -C "${RUNNER_TEMP}"
+        echo "${RUNNER_TEMP}/${name}" >> "$GITHUB_PATH"
+    - shell: bash
+      run: zig version
