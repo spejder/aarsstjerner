@@ -4,7 +4,7 @@ go 1.26.5
 
 require (
 	bitbucket.org/long174/go-odoo v1.12.1
-	github.com/1password/onepassword-sdk-go v0.4.0
+	github.com/1password/onepassword-sdk-go v0.4.1
 	github.com/brianvoe/gofakeit/v6 v6.28.0
 	github.com/carlmjohnson/versioninfo v0.22.5
 	github.com/charmbracelet/glamour v1.0.0
